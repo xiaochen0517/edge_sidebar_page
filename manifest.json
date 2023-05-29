@@ -1,0 +1,17 @@
+{
+    "lang": "en-us",
+    "name": "Edge side bar pages",
+    "short_name": "EdgeSideBar",
+    "description": "Edge side bar pages",
+    "start_url": "./",
+    "background_color": "#2f3d58",
+    "theme_color": "#2f3d58",
+    "orientation": "any",
+    "display": "browser",
+    "icons": [
+        {
+            "src": ".assert/images/icon512.png",
+            "sizes": "512x512"
+        }
+    ]
+}
