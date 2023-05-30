@@ -33,7 +33,8 @@ createApp({
                     url: '',
                     name: ''
                 },
-            }
+            },
+            editIndex: -1,
         }
     },
     mounted() {
@@ -61,13 +62,22 @@ createApp({
         openAddSitePageDialog() {
             // 清除对话框内容
             this.cleanDialogData()
+            this.editIndex = -1
+            // 打开对话框
             this.addSitePageDialog.open()
         },
         confirmAddSitePage() {
             // 验证添加的内容
             if (!this.validateDialogData()) return
-            // 将site添加到siteList
-            this.siteList.push(this.dialogData.form)
+            // 判断是添加还是修改
+            const siteInfo = JSON.parse(JSON.stringify(this.dialogData.form))
+            if (this.editIndex >= 0) {
+                // 修改
+                this.siteList.splice(this.editIndex, 1, siteInfo)
+            } else {
+                // 将site添加到siteList
+                this.siteList.push(siteInfo)
+            }
             // 将siteList保存到cookie
             Cookies.set('siteList', JSON.stringify(this.siteList))
             // 关闭对话框
@@ -105,6 +115,12 @@ createApp({
         deleteCurrentSite(index) {
             this.siteList.splice(index, 1)
             Cookies.set('siteList', JSON.stringify(this.siteList))
-        }
+        },
+        editCurrentSite(index) {
+            const siteInfo = this.siteList[index]
+            this.dialogData.form = JSON.parse(JSON.stringify(siteInfo))
+            this.editIndex = index
+            this.addSitePageDialog.open()
+        },
     },
 }).mount('#app')

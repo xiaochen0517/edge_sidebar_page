@@ -32,7 +32,12 @@
                         <div class="site-title-box">
                             <div class="title-content">{{item.name}}</div>
                         </div>
-                        <div class="delete-site-button" @click.stop="deleteCurrentSite(index)">X</div>
+                        <div class="delete-site-button" @click.stop="deleteCurrentSite(index)">
+                            <i class="mdui-icon material-icons">delete_forever</i>
+                        </div>
+                        <div class="edit-site-button" @click.stop="editCurrentSite(index)">
+                            <i class="mdui-icon material-icons">edit</i>
+                        </div>
                     </div>
                 </div>
             </div>
