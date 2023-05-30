@@ -6,14 +6,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2" />
     <link rel="manifest" href="./manifest.json">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <link rel="stylesheet" href="./main.css">
+    <title>Edge Sidebar Site - v0.0.1</title>
 </head>
 
-<body>
-    <h1>Test</h1>
-    <a href="https://www.baidu.com/">baidu</a>
-    <a href="https://www.asasmr2.com/">asasmr</a>
-    <script src="./main.js"></script>
+<body class="mdui-theme-primary-light-blue mdui-theme-accent-deep-orange">
+    <div id="app" v-cloak>
+        <div class="mdui-toolbar mdui-color-theme">
+            <span class="mdui-typo-title">{{title}}</span>
+            <div class="mdui-toolbar-spacer"></div>
+            <a href="javascript:;" class="mdui-btn mdui-btn-icon">
+                <i class="mdui-icon material-icons">search</i>
+            </a>
+        </div>
+        <br>
+        <div class="mdui-container">
+            <div class="mdui-row">
+                <div v-for="(item, index) in siteList" :key="index" class="mdui-col-xs-4 mdui-col-sm-2 mdui-col-md-1"
+                    @click="goToNewSite(item)">
+                    <div class="site-page-card">
+                        <div class="site-icon-box">
+                            <img :src="item.icon" alt="icon">
+                        </div>
+                        <div class="site-title-box">
+                            <div class="title-content">{{item.name}}</div>
+                        </div>
+                        <div class="delete-site-button" @click.stop="deleteCurrentSite(index)">X</div>
+                    </div>
+                </div>
+            </div>
+            <div v-show="siteList.length == 0" class="mdui-row">
+                <div class="mdui-col-offset-xs-3 mdui-col-xs-6">
+                    <button class="mdui-btn mdui-ripple mdui-color-theme-accent" @click="openAddSitePageDialog()">
+                        Add Site Page
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button class="mdui-fab mdui-fab-fixed mdui-fab-mini mdui-color-theme-accent mdui-ripple"
+            @click="openAddSitePageDialog()">
+            <i class="mdui-icon material-icons">add</i>
+        </button>
+        <div ref="addSitePageDialogRefs" class="mdui-dialog" id="addSitePageDialog">
+            <div class="mdui-dialog-title">Are you sure?</div>
+            <div class="mdui-dialog-content">
+                <div class="mdui-container">
+                    <div class="mdui-row">
+                        <div :class="{'mdui-textfield-invalid': dialogData.invalid.icon.length > 0}"
+                            class="mdui-textfield">
+                            <i class="mdui-icon material-icons">account_circle</i>
+                            <label class="mdui-textfield-label">Icon</label>
+                            <input v-model="dialogData.form.icon" class="mdui-textfield-input" type="text" />
+                            <div class="mdui-textfield-error">{{dialogData.invalid.icon}}</div>
+                        </div>
+                        <div :class="{'mdui-textfield-invalid': dialogData.invalid.url.length > 0}"
+                            class="mdui-textfield">
+                            <i class="mdui-icon material-icons">account_circle</i>
+                            <label class="mdui-textfield-label">Url</label>
+                            <input v-model="dialogData.form.url" class="mdui-textfield-input" type="text" />
+                            <div class="mdui-textfield-error">{{dialogData.invalid.url}}</div>
+                        </div>
+                        <div :class="{'mdui-textfield-invalid': dialogData.invalid.name.length > 0}"
+                            class="mdui-textfield">
+                            <i class="mdui-icon material-icons">account_circle</i>
+                            <label class="mdui-textfield-label">Name</label>
+                            <input v-model="dialogData.form.name" class="mdui-textfield-input" type="text" />
+                            <div class="mdui-textfield-error">{{dialogData.invalid.name}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mdui-dialog-actions">
+                <button class="mdui-btn mdui-ripple" mdui-dialog-close>CANCEL</button>
+                <button class="mdui-btn mdui-ripple" @click="confirmAddSitePage()">ADD</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./main.js"></script>
 </body>
 
 </html>

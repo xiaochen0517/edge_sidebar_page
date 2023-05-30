@@ -1,0 +1,57 @@
+[v-cloak] {
+  display: none;
+}
+.site-page-card {
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 5px 0;
+  position: relative;
+}
+.site-page-card:hover {
+  background-color: #f5f5f5;
+}
+.site-page-card:hover .delete-site-button {
+  display: block;
+}
+.site-page-card .site-icon-box {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+}
+.site-page-card .site-icon-box img {
+  max-width: calc(100% - 20px);
+  /* 考虑到10px的左右边距，减去20px */
+  max-height: calc(100% - 20px);
+  /* 考虑到10px的上下边距，减去20px */
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: lightgray;
+}
+.site-page-card .site-title-box {
+  width: 100%;
+  overflow: hidden;
+}
+.site-page-card .site-title-box .title-content {
+  white-space: nowrap;
+}
+.site-page-card .delete-site-button {
+  display: none;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  background-color: #f44336;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.site-page-card .delete-site-button:hover {
+  background-color: #d32f2f;
+}
