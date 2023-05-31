@@ -79,7 +79,9 @@ createApp({
                 this.siteList.push(siteInfo)
             }
             // 将siteList保存到cookie
-            Cookies.set('siteList', JSON.stringify(this.siteList))
+            Cookies.set('siteList', JSON.stringify(this.siteList), {
+                expires: 3650
+            })
             // 关闭对话框
             this.addSitePageDialog.close()
         },
@@ -114,7 +116,9 @@ createApp({
         },
         deleteCurrentSite(index) {
             this.siteList.splice(index, 1)
-            Cookies.set('siteList', JSON.stringify(this.siteList))
+            Cookies.set('siteList', JSON.stringify(this.siteList), {
+                expires: 3650
+            })
         },
         editCurrentSite(index) {
             const siteInfo = this.siteList[index]
