@@ -89,7 +89,7 @@ createApp({
             let valid = true
             const form = this.dialogData.form
             // icon不可为空且需要是一个url，使用正则表达式验证
-            if (!form.icon || !form.icon.match(/^(http|https):\/\/.*\.(png|jpg|jpeg|gif|svg)$/)) {
+            if (!form.icon || !form.icon.match(/^(http|https|file):\/+.*\.(png|jpg|jpeg|gif|svg)$/)) {
                 this.dialogData.invalid.icon = '请输入正确的icon地址'
                 valid = false
             } else {
