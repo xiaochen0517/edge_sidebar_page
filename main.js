@@ -57,7 +57,8 @@ createApp({
             }
         },
         goToNewSite(siteInfo) {
-            window.open(siteInfo.url)
+            // window.open(siteInfo.url)
+            window.location.href = siteInfo.url
         },
         openAddSitePageDialog() {
             // 清除对话框内容
